@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>brodychan.com</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color1: RGB(255, 195, 0);
+            --color2: RGB(255, 195, 0);
+            --color3: rgb(37, 150, 190);
+            --color4: rgb(37, 150, 190);
+            --color5: #E74C3C;
+            --color6: #E74C3C;
+            --color7: rgba(230,24,115,255);
+            --color8: rgba(230,24,115,255);
+        }
+
+        .back {
+            display: none;
+            text-align: center;
+            padding: 10px 40px;
+            cursor: pointer;
+            border: none;
+            border-radius: 0;
+            width: 797px;
+            color: black;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+
+        .content-paragraph {
+            width: 777px;
+            overflow-y: auto;
+            height: 338px;
+            padding: 10px;
+            color: #ccc;
+            background-color: #212121;
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .content-paragraph::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .content-paragraph::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .content-paragraph::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        .back:hover {
+            filter: brightness(85%);
+        }
+
+        .content-paragraph {
+            display: none;
+            margin-top: 0;
+        }
+
+        body {
+            background-color: #212121;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            transition: 2s;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            z-index: -1;
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: 300;
+            font-size: 14px;
+            color: dimgray;
+        }
+
+        .creation-list {
+            display: block;
+            position: relative;
+            width: 796px;
+            margin: 0 auto;
+            padding: 5px 10px;
+            font-weight: 400;
+            font-size: 16px;
+            text-decoration: none;
+            line-height: 16px;
+            text-align: left;
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .unselect-title {
+            margin-top: 80px;
+            margin-bottom: 0;
+            font-weight: 100;
+            font-size: 75px;
+            text-align: center;
+            color: dimgray;
+        }
+
+        .select-language {
+            text-align: center;
+            color: dimgray;
+        }
+
+        .creation-list {
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: -1;
+            opacity: .7;
+            background-repeat: no-repeat;
+            color: dimgray;
+        }
+
+        .homeTable {
+            margin: 0 auto;
+            width: 800px;
+            overflow: hidden;
+        }
+
+        .homeCell {
+            display: block;
+            position: relative;
+            margin: 1px;
+            float: left;
+            width: 198px;
+            height: 198px;
+            opacity: 0.6;
+            cursor: pointer;
+            background-color: #000;
+            transition: opacity 0.5s ease;
+        }
+
+        .homeCell-title {
+            position: absolute;
+            bottom: 33px;
+            left: 0;
+            padding-left: 20px;
+            text-align: center;
+            font-weight: 400;
+            font-size: 20px;
+            opacity: 80%;
+        }
+
+        .homeCell-subtitle {
+            position: absolute;
+            z-index: 1;
+            bottom: 15px;
+            left: 0;
+            padding-left: 20px;
+            text-align: left;
+            font-weight: 400;
+            font-size: 14px;
+            opacity: 0.45;
+        }
+
+        .homeCell-background {
+            position: absolute;
+            top: 0;
+            bottom: 18px;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 80px;
+            height: auto;
+            transform: scale(0.8, 0.8);
+            transition: opacity 0.2s ease;
+        }
+
+        .homeCell:hover {
+            opacity: 0.8;
+            transition: opacity 0.5s ease;
+        }
+
+        .darken {
+            background-color: black;
+            transition: 1s;
+        }
+
+        .homeTable.lightgray .homeCell {
+            background-color: black;
+        }
+
+        .subtitle-paragraph {
+            font-size: 28px;
+            color: #ffed00;
+            font-weight: bold;
+        }
+
+        .paragraph-title {
+            display: none;
+            margin-top: 8px;
+            margin-left: 40px;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .paragraph-subtitle {
+            display: none;
+            margin-left: 28px;
+        }
+
+        .paragraph-text-1, .paragraph-text-2 {
+            display: none;
+            margin-left: 28px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        [data-color="color1"] .homeCell-title,
+        [data-color="color1"] .homeCell-subtitle,
+        [data-color="color1"] .paragraph-title {
+            color: var(--color1);
+        }
+
+        [data-color="color2"] .homeCell-title,
+        [data-color="color2"] .homeCell-subtitle,
+        [data-color="color2"] .paragraph-title {
+            color: var(--color2);
+        }
+
+        [data-color="color3"] .homeCell-title,
+        [data-color="color3"] .homeCell-subtitle,
+        [data-color="color3"] .paragraph-title {
+            color: var(--color3);
+        }
+
+        [data-color="color4"] .homeCell-title,
+        [data-color="color4"] .homeCell-subtitle,
+        [data-color="color4"] .paragraph-title {
+            color: var(--color4);
+        }
+
+        [data-color="color5"] .homeCell-title,
+        [data-color="color5"] .homeCell-subtitle,
+        [data-color="color5"] .paragraph-title {
+            color: var(--color5);
+        }
+
+        [data-color="color6"] .homeCell-title,
+        [data-color="color6"] .homeCell-subtitle,
+        [data-color="color6"] .paragraph-title {
+            color: var(--color6);
+        }
+
+        [data-color="color7"] .homeCell-title,
+        [data-color="color7"] .homeCell-subtitle,
+        [data-color="color7"] .paragraph-title {
+            color: var(--color7);
+        }
+
+        [data-color="color8"] .homeCell-title,
+        [data-color="color8"] .homeCell-subtitle,
+        [data-color="color8"] .paragraph-title {
+            color: var(--color8);
+        }
+    </style>
+</head>
+<body>
+    <div class="footer">Copyright © 2024 Brody Chan</div>
+    <h1 class="unselect-title">Brody Chan</h1>
+    <div class="select-language">
+        <a href="#nl">nl</a>
+        <a href="#en">en</a>
+        <a href="#中文">中文</a>
+    </div>
+    <div class="creation-list">Creation List</div>
+    <div class="homeTable">
+        <div class="homeCell" data-page="piano" data-back-text="Back ▼" data-color="color1">
+            <img src="icons/icon-1.png" class="homeCell-background">
+            <div class="homeCell-title">Piano</div>
+            <div class="homeCell-subtitle">Video Performances</div>
+        </div>
+        <div class="homeCell" data-page="music" data-back-text="Back ▼" data-color="color2">
+            <img src="icons/icon-2.png" class="homeCell-background">
+            <div class="homeCell-title">Music</div>
+            <div class="homeCell-subtitle">Compositions</div>
+        </div>
+        <div class="homeCell" data-page="webdev" data-back-text="Back ▼" data-color="color3">
+            <img src="icons/icon-3.png" class="homeCell-background">
+            <div class="homeCell-title">WebDev</div>
+            <div class="homeCell-subtitle">Website Projects</div>
+        </div>
+        <div class="homeCell" data-page="softdev" data-back-text="Back ▼" data-color="color4">
+            <img src="icons/icon-4.png" class="homeCell-background">
+            <div class="homeCell-title">SoftDev</div>
+            <div class="homeCell-subtitle">Software Projects</div>
+        </div>
+        <div class="homeCell" data-page="machine-learning" data-back-text="Back ▼" data-color="color5">
+            <img src="icons/icon-5.png" class="homeCell-background">
+            <div class="homeCell-title">Data Science</div>
+            <div class="homeCell-subtitle">Studies and Projects</div>
+        </div>
+        <div class="homeCell" data-page="writing" data-back-text="Back ▼" data-color="color6">
+            <img src="icons/icon-6.png" class="homeCell-background">
+            <div class="homeCell-title">Blog</div>
+            <div class="homeCell-subtitle">Learning Journey</div>
+        </div>
+        <div class="homeCell" data-page="bio" data-back-text="Back ▼" data-color="color7">
+            <img src="icons/icon-7.png" class="homeCell-background">
+            <div class="homeCell-title">Bio</div>
+            <div class="homeCell-subtitle">About Me</div>
+        </div>
+        <div class="homeCell" data-page="links" data-back-text="Back ▼" data-color="color8">
+            <img src="icons/icon-8.png" class="homeCell-background">
+            <div class="homeCell-title">Links</div>
+            <div class="homeCell-subtitle">Social Networks</div>
+        </div>
+    </div>
+
+    <button class="back">Back</button>
+
+
+    <p id="piano-paragraph" class="content-paragraph" data-color="color1">
+        <span class="paragraph-title">Piano</span>
+        <span class="paragraph-text-1">This is my first composition project written in F Major. It has a simple bass line of chords progression. </span>
+        <span class="paragraph-text-2">qwerty</span>
+        <span class="paragraph-subtitle">Learn and enjoy piano music.</span>
+    </p>
+    <p id="music-paragraph" class="content-paragraph" data-color="color2">
+        <span class="paragraph-title">Music</span>
+        <span class="paragraph-text-1">2024</span>
+        <span class="paragraph-text-2">Piano compositions</span>
+    </p>
+    <p id="webdev-paragraph" class="content-paragraph" data-color="color3">
+        <span class="paragraph-title">Web Development</span>
+        <span class="paragraph-text-1">My personal website</span>
+        <span class="paragraph-text-2"> This website serves as a platform to showcase my diverse projects, which span from innovative software solutions and data science projects to original musical compositions.</span>
+    </p>
+    <p id="softdev-paragraph" class="content-paragraph" data-color="color4">
+        <span class="paragraph-title">Software Development</span>
+        <span class="paragraph-text-1">Beam Calculator</span>
+        <span class="paragraph-text-2">Developed to streamline workflows and enhance productivity with its intuitive interface and reliable performance.</span>
+    </p>
+    <p id="machine-learning-paragraph" class="content-paragraph" data-color="color5">
+        <span class="paragraph-title">Data Science</span>
+        <span class="paragraph-text-1">Idioms and Insights</span>
+        <span class="paragraph-text-2">Projects involving various machine learning techniques and applications.</span>
+    </p>
+    <p id="writing-paragraph" class="content-paragraph" data-color="color6">
+        <span class="paragraph-title">Blog</span>
+        <span class="paragraph-text-1">Learning Journey</span>
+        <span class="paragraph-text-2">Documenting my experiences and insights.</span>
+    </p>
+    <p id="bio-paragraph" class="content-paragraph" data-color="color7">
+        <span class="paragraph-title">Biography</span>
+        <span class="paragraph-text-1">Summary</span>
+        <span class="paragraph-text-2">Civil, geotechnical and hydraulic engineering by profession.Developing software tools. I find joy in playing the piano and creating music. Resume. Skills.</span>
+    </p>
+    <p id="links-paragraph" class="content-paragraph" data-color="color8">
+        <span class="paragraph-title">Links</span>
+        <span class="paragraph-text-1">Email: brodychan.dev@gmail.com</span>
+        <span class="paragraph-text-2">GitHub: <a href="https://github.com/chanbrody" target="_blank">chanbrody</a></span>
+    </p>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+$(document).ready(function() {
+    $('.homeCell').click(function() {
+        var dataPage = $(this).data('page');
+        var backText = $(this).data('back-text');
+        var backColorClass = $(this).data('color');
+        var backColor = getComputedStyle(document.documentElement).getPropertyValue('--' + backColorClass);
+
+        $(".homeTable").stop().slideUp(700).addClass("lightgray");
+        $("body").addClass("darken");
+        $(".creationsLink").addClass("disabled");
+        $('.content-paragraph').hide();
+        $('#' + dataPage + '-paragraph').find('.paragraph-title').show();
+        $('#' + dataPage + '-paragraph').find('.paragraph-text-1').show();
+        $('#' + dataPage + '-paragraph').find('.paragraph-text-2').show();
+        $('#' + dataPage + '-paragraph').slideDown('slow');
+        $('.back').text(backText).css('background-color', backColor).fadeIn('slow');
+        $('#' + dataPage + '-paragraph').find('.paragraph-subtitle').show();
+    });
+
+    $(".back").click(function() {
+        $(".homeTable").stop().slideDown(600).removeClass("lightgray");
+        $("body").removeClass("darken");
+        $(".creationsLink").removeClass("disabled");
+        $('.content-paragraph').slideUp('slow').find('.paragraph-title').show();
+        $('.content-paragraph').slideUp('slow').find('.paragraph-text-1').show();
+        $('.content-paragraph').slideUp('slow').find('.paragraph-text-2').show();
+        $(this).fadeOut('slow');
+        $('.content-paragraph').slideUp('slow').find('.paragraph-subtitle').show();
+    });
+});
+    </script>
+</body>
+</html>
